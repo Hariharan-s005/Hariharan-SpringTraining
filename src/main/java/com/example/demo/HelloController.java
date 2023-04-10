@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
@@ -40,49 +39,50 @@ public class HelloController {
 	@RequestMapping(value = "hello4",method = RequestMethod.GET)
 	public ModelAndView sayHello4()
 	{
-		ModelAndView mandv = new ModelAndView();
-		mandv.addObject("mykey", "Welcome to Spring mvc3 from injected object...");
-		mandv.setViewName("Welcome1");
-		return mandv;
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("mykey", "Welcome to Spring mvc3 from injected object...");
+		modelAndView.addObject("hello", "Sirius");
+		modelAndView.setViewName("Welcome1");
+		return modelAndView;
 	}
 	@RequestMapping(value = "hello5",method = RequestMethod.GET)
-	public ModelAndView sayHello5(ModelAndView mandv)
+	public ModelAndView sayHello5(ModelAndView modelAndView)
 	{
-		mandv.addObject("mykey", "Welcome to Spring mvc4 from injected object...");
-		mandv.setViewName("Welcome1");
-		return mandv;
+		modelAndView.addObject("mykey", "Welcome to Spring mvc4 from injected object...");
+		modelAndView.setViewName("Welcome1");
+		return modelAndView;
 	}
 	@RequestMapping(value = "hello6",method = RequestMethod.GET)
-	public ModelAndView sayHello6(ModelAndView mandv,HttpServletRequest request)
+	public ModelAndView sayHello6(ModelAndView modelAndView,HttpServletRequest request)
 	{
-		mandv.addObject("mykey","welcome to spring from SayHello6....");
-		mandv.setViewName("Welcome1");
+		modelAndView.addObject("mykey","welcome to spring from SayHello6....");
+		modelAndView.setViewName("Welcome1");
 		HttpSession session = request.getSession();
 		request.setAttribute("hello", "Hello World from request 6 Object");
 		session.setAttribute("hello2", "Hello from session object");
-		return mandv;
+		return modelAndView;
 	}
 	@RequestMapping(value = "repeat",method = RequestMethod.GET)
-	public ModelAndView sayHello7(ModelAndView mandv,HttpServletRequest request)
+	public ModelAndView sayHello7(ModelAndView modelAndView,HttpServletRequest request)
 	{
-		mandv.addObject("mykey","welcome to spring from Repeat....");
-		mandv.setViewName("Welcome1");
+		modelAndView.addObject("mykey","welcome to spring from Repeat....");
+		modelAndView.setViewName("Welcome1");
 		request.setAttribute("hello", "Hello World from request 7 Object");
-		return mandv;
+		return modelAndView;
 	}
 	@RequestMapping(value = "hello7/{name}", method = RequestMethod.GET)
-	public ModelAndView sayHello8(@PathVariable String name,ModelAndView mandv,HttpServletRequest request) {
-		mandv.addObject("mykey",name);
-		mandv.setViewName("Welcome1");
+	public ModelAndView sayHello8(@PathVariable String name,ModelAndView modelAndView,HttpServletRequest request) {
+		modelAndView.addObject("mykey",name);
+		modelAndView.setViewName("Welcome1");
 		request.setAttribute("hello", "Hello World from request 7 Object");
-		return mandv;
+		return modelAndView;
 	}
 	@RequestMapping(value = "hello8", method = RequestMethod.GET)
-	public ModelAndView sayHello9(@RequestParam("uname") String name,ModelAndView mandv,HttpServletRequest request) {
-		mandv.addObject("mykey",name);
-		mandv.setViewName("Welcome1");
-		request.setAttribute("hello", "Hello World from request 7 Object");
-		return mandv;
+	public ModelAndView sayHello9(@RequestParam("uname") String name,ModelAndView modelAndView,HttpServletRequest request) {
+		modelAndView.addObject("mykey",name);
+		modelAndView.setViewName("Welcome1");
+		request.setAttribute("hello", "Hello World from request 8 Object");
+		return modelAndView;
 	}
 	@RequestMapping(value ="hello9",method = RequestMethod.GET)
 	public ResponseEntity<User> sayHello11()
@@ -105,12 +105,5 @@ public class HelloController {
 		user.setUid(500);
 		user.setUsername("Hariharan S");
 		return user;
-	}
-	@RequestMapping(value="hello12",method = RequestMethod.GET)
-	public ModelAndView sayHello14(@MatrixVariable String name,ModelAndView mandv)
-	{
-		mandv.addObject("mykey",name);
-		mandv.setViewName("welcome1");
-		return mandv;
 	}
 }
