@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.example.demo.service.UserService;
+import com.example.demo.dto.*;
+import com.example.demo.service.*;
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
@@ -48,7 +50,7 @@ public class HelloController {
 	/**
 	 * Prints hello world on the console when the URL Path "hello1" is requested
 	 */
-	@GetMapping(value = "hello1")
+	@GetMapping("hello1")
 	public void sayHello()
 	{
 		System.out.println("Hello world");
@@ -60,7 +62,7 @@ public class HelloController {
 	 * Prints Hello2 on the console when the URL Path "hello2" is requested  and  displays string Welcome when URL path is requested
 	 * @return String 'Welcome'
 	 */
-	@GetMapping(value = "hello2")
+	@GetMapping("hello2")
 	public String sayHello2()
 	{
 		System.out.println("Hello2 is called");
@@ -73,7 +75,7 @@ public class HelloController {
 	 * Displays message on the URL path "hello3"
 	 * @return ResponseEntity with status ok and status message
 	 */
-	@GetMapping(value = "hello3")
+	@GetMapping("hello3")
 	public ResponseEntity<String> sayHello3()
 	{
 		return ResponseEntity.ok("Hi!! and Welcome to MVC");
@@ -85,7 +87,7 @@ public class HelloController {
 	 * Displays mykey, hello and hello2 values on the URL path "hello4"
 	 @return ModelAndview object 'modelAndView'
 	 */
-	@GetMapping(value = "hello4")
+	@GetMapping("hello4")
 	public ModelAndView sayHello4()
 	{
 		ModelAndView modelAndView = new ModelAndView();
@@ -103,7 +105,7 @@ public class HelloController {
 	 * @param ModelAndview object 'modelAndView'
 	 * @return ModelAndview object 'modelAndView'
 	 */
-	@GetMapping(value = "hello5")
+	@GetMapping("hello5")
 	public ModelAndView sayHello5(ModelAndView modelAndView)
 	{
 		modelAndView.addObject("mykey", "Welcome to Spring mvc4 from injected object...");
@@ -119,7 +121,7 @@ public class HelloController {
 	 * @param HttpServletRequest object 'request'
 	 * @return ModelAndview object 'modelAndView'
 	 */
-	@GetMapping(value = "hello6")
+	@GetMapping("hello6")
 	public ModelAndView sayHello6(ModelAndView modelAndView,HttpServletRequest request)
 	{
 		modelAndView.addObject("mykey","welcome to spring from SayHello6....");
@@ -139,7 +141,7 @@ public class HelloController {
 	 * @param HttpServletRequest object 'request'
 	 * @return ModelAndview object 'modelAndView'
 	 */
-	@GetMapping(value = "repeat")
+	@GetMapping("repeat")
 	public ModelAndView sayHello7(ModelAndView modelAndView,HttpServletRequest request)
 	{
 		modelAndView.addObject("mykey","welcome to spring from Repeat....");
@@ -158,7 +160,7 @@ public class HelloController {
 	 * @param HttpServletRequest object 'request'
 	 * @return ModelAndview object 'modelAndView'
 	 */
-	@GetMapping(value = "hello7/{name}")
+	@GetMapping("hello7/{name}")
 	public ModelAndView sayHello8(@PathVariable String name,ModelAndView modelAndView,HttpServletRequest request) {
 		modelAndView.addObject("mykey",name);
 		modelAndView.setViewName("Welcome1");
@@ -176,7 +178,7 @@ public class HelloController {
 	 * @param HttpServletRequest object 'request'
 	 * @return ModelAndview object 'modelAndView'
 	 */
-	@GetMapping(value = "hello8")
+	@GetMapping("hello8")
 	public ModelAndView sayHello9(@RequestParam("uname") String name,ModelAndView modelAndView,HttpServletRequest request) {
 		modelAndView.addObject("mykey",name);
 		modelAndView.setViewName("Welcome1");
@@ -191,7 +193,7 @@ public class HelloController {
 	 * Updates user data when the URL path hello9 is requested
 	 * @return ResponseEntity with status ok and status message
 	 */
-	@GetMapping(value ="hello9")
+	@GetMapping("hello9")
 	public ResponseEntity<User> sayHello11()
 	{
 		User user= new User();
@@ -207,7 +209,7 @@ public class HelloController {
 	 * @param User object 'user'
 	 * @return  ResponseEntity with status ok and status message
 	 */
-	@PostMapping(value="hello10")
+	@PostMapping("hello10")
 	public ResponseEntity<User> sayHello12(@RequestBody User user)
 	{
 		getUserService().updateUser(user,1000000,"Hariharan");
@@ -221,7 +223,7 @@ public class HelloController {
 	 * @param User object 'user'
 	 * @return User object 'user'
 	 */
-	@PostMapping(value="hello11")
+	@PostMapping("hello11")
 	public User sayHello13(@RequestBody User user)
 	{
 		getUserService().updateUser(user,500,"Hariharan S");

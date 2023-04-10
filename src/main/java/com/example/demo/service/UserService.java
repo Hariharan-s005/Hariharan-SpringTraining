@@ -1,7 +1,9 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
+
+import com.example.demo.dto.*;
 @Service
 public class UserService {
 	

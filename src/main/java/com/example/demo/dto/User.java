@@ -1,4 +1,5 @@
-package com.example.demo;
+package com.example.demo.dto;
+
 
 /**
  * Class User with getters and setters for UserId and UserName 
