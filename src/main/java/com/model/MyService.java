@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 public class MyService{
 
 @Autowired
-private AccountsDAO dao;
+private AccountsDAO accountsDAO;
 
  public void doService(int accountId,int amount) {
-	 AccountsDTO dto=dao.findByID(accountId);
-	 dto.setAmount(amount);
-	 dao.updateAccount(dto);
+	 AccountsDTO accountsDTO=accountsDAO.findByID(accountId);
+	 accountsDTO.setAmount(amount);
+	 accountsDAO.updateAccount(accountsDTO);
 
 }
 
  public AccountsDAO getDAO() {
-	 return dao;
+	 return accountsDAO;
 	 
 }
 

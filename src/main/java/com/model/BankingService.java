@@ -9,25 +9,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class BankingService {
 	
 	@Autowired
-	private AccountsDAO dao;
+	private AccountsDAO accountsDAO;
 	
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void doCredit(int accountId,int creditAmount) {
-		AccountsDTO dto=dao.findByID(accountId);
-		int amount=dto.getAmount();
+		AccountsDTO accountsDTO=accountsDAO.findByID(accountId);
+		int amount=accountsDTO.getAmount();
 		int newAmount=amount+creditAmount;
-		dto.setAmount(newAmount);
-		dao.updateAccount(dto);
+		accountsDTO.setAmount(newAmount);
+		accountsDAO.updateAccount(accountsDTO);
 	}
 	@Transactional(propagation = Propagation.REQUIRED,rollbackFor = {InsufficientBalance.class})
 	public void doDebit(int accountId,int debitAmount)throws InsufficientBalance {
-		AccountsDTO dto=dao.findByID(accountId);
-		int amount=dto.getAmount();
+		AccountsDTO accountsDTO=accountsDAO.findByID(accountId);
+		int amount=accountsDTO.getAmount();
 		if(amount<debitAmount) {
 			throw new InsufficientBalance("Balance not sufficient");
 		}
 		int newAmount=amount-debitAmount;
-		dto.setAmount(newAmount);
-		dao.updateAccount(dto);
+		accountsDTO.setAmount(newAmount);
+		accountsDAO.updateAccount(accountsDTO);
 	}
 }

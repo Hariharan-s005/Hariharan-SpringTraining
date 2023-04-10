@@ -23,7 +23,7 @@ public class BankingDemoApplication {
 		ApplicationContext context =  SpringApplication.run(BankingDemoApplication.class, args);
 		TransactionService service = context.getBean("transactionService",TransactionService.class);
 		try {
-			service.moneyTransfer(200,100, 1000);
+			service.moneyTransfer(100,200, 1000);
 		} catch (InsufficientBalance e) {
 			e.printStackTrace();
 		}

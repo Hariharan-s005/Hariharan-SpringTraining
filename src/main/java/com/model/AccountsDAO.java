@@ -11,13 +11,13 @@ public class AccountsDAO {
 	
 	public AccountsDTO findByID(int id) {
 		Session session=factory.getCurrentSession();
-		AccountsDTO dto=session.get(AccountsDTO.class,Integer.valueOf(id));
-		return dto;
+		AccountsDTO accountsDTO=session.get(AccountsDTO.class,Integer.valueOf(id));
+		return accountsDTO;
 	}
-	public void updateAccount(AccountsDTO dto)
+	public void updateAccount(AccountsDTO accountsDTO)
 	{
 		Session session = factory.getCurrentSession();
-		session.persist(dto);
+		session.persist(accountsDTO);
 	}
 	public SessionFactory getFactory() {
 		return factory;
