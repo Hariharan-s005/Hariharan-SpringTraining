@@ -1,13 +1,13 @@
 package com.model;
 
 public class InsufficientBalance extends Exception{
-	String msg;
+	String message;
 
-	public InsufficientBalance(String msg) {
-		this.msg = msg;
+	public InsufficientBalance(String message) {
+		this.message = message;
 	}
 	@Override
 	public String toString() {
-		return msg;
+		return message;
 	}
 }

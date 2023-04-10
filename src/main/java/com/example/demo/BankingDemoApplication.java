@@ -20,10 +20,10 @@ import com.model.TransactionService;
 public class BankingDemoApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx =  SpringApplication.run(BankingDemoApplication.class, args);
-		TransactionService service = ctx.getBean("tss",TransactionService.class);
+		ApplicationContext context =  SpringApplication.run(BankingDemoApplication.class, args);
+		TransactionService service = context.getBean("transactionService",TransactionService.class);
 		try {
-			service.moneyTransfer(100,200, 500);
+			service.moneyTransfer(200,100, 1000);
 		} catch (InsufficientBalance e) {
 			e.printStackTrace();
 		}
