@@ -1,19 +1,24 @@
 package com.example.demo;
 
+/**
+ * Class User with getters and setters for UserId and UserName 
+ * @author Hariharan Shakthivel
+ *
+ */
 public class User {
-	int uid;
-	String Username;
-	public int getUid() {
-		return uid;
+	int userId;
+	String userName;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getUsername() {
-		return Username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		Username = username;
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 	
 }

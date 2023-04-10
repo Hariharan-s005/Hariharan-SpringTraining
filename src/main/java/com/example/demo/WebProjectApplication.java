@@ -12,7 +12,8 @@ import org.springframework.context.ApplicationContext;
 public class WebProjectApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(WebProjectApplication.class, args);
+        //creates context object of ApplicationContext
+		ApplicationContext context = SpringApplication.run(WebProjectApplication.class, args);
 	}
 
 }
