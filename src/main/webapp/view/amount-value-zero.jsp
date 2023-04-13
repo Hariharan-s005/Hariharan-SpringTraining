@@ -1,4 +1,5 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <html>
 	<head>
 		<style>
@@ -15,18 +16,10 @@
 	</head>
 	<body>
 		<div class="container">
-			<form:form action="/bank/transfer" method="POST" modelAttribute="transfer">
-				CreditID:<form:input path="credit"/><br>
-				DebitID:<form:input path="debit"/><br>
-				Amount:<form:input path="amount"/><br>
-
-				<input type="submit" value="Make Transaction">
-				
+			<form:form action="/bank/menu" method="GET" >
+			<h1>Please enter correct amount value(should not be zero)</h1>
+			<input type="submit" value="menu">
 			</form:form>
 		</div>
 	</body>
 </html>
-
-
-
-	

@@ -33,5 +33,4 @@ public String toString() {
 	return "Transaction [credit=" + credit + ", debit=" + debit + ", amount=" + amount + "]";
 }
   
-
 }

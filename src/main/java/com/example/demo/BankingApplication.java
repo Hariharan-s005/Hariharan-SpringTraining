@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * BankingApplication class
- * @author Hariharan SHakthivel
+ * @author Hariharan Shakthivel
  *
  */
 @SpringBootApplication

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.exception.AmountvalueException;
 import com.example.exception.IdAlreadyExistException;
 import com.example.exception.InsufficientBalanceException;
+import com.example.exception.NegativeAmountException;
 
 
 /**
@@ -38,14 +40,14 @@ public class BankService implements BankServiceInterface{
 	@Override
 	public BankDTO checkBalance(int id) {
 		// TODO Auto-generated method stub
-		Optional<BankDTO> obj=bankDAO.findById(Integer.valueOf(id));
-		BankDTO bankAcc=obj.get();
-		return bankAcc;
+		Optional<BankDTO> optional=bankDAO.findById(Integer.valueOf(id));
+		BankDTO bankAccount=optional.get();
+		return bankAccount;
 	}
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRES_NEW)
-	public void transfer(Transaction trans) throws InsufficientBalanceException {
+	public void transfer(Transaction trans) throws InsufficientBalanceException, AmountvalueException, NegativeAmountException {
 		
 	  int creditId=trans.getCredit();
 	  int debitId=trans.getDebit();
@@ -57,24 +59,29 @@ public class BankService implements BankServiceInterface{
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void debitransfer(int id,int amount) throws InsufficientBalanceException {
-		Optional<BankDTO> obj1=bankDAO.findById(Integer.valueOf(id));
-		BankDTO bankAcc1=obj1.get();
-		if(bankAcc1.getAmount()<amount) {
+	public void debitransfer(int id,int amount) throws InsufficientBalanceException, AmountvalueException, NegativeAmountException {
+		Optional<BankDTO> optional=bankDAO.findById(Integer.valueOf(id));
+		BankDTO bankAccount=optional.get();
+		if(bankAccount.getAmount()<amount) {
 			throw new InsufficientBalanceException("Insufficient balance");
 		}
-		bankAcc1.setAmount(bankAcc1.getAmount()-amount);
-		System.out.println(bankAcc1.getAmount());
-		bankDAO.save(bankAcc1);
+		if(amount==0)
+			throw new AmountvalueException("Please enter correct amount(should not be zero)");
+		if(amount<0)
+			throw new NegativeAmountException("Please enter correct amount(should be greater than zero)");
+		
+		bankAccount.setAmount(bankAccount.getAmount()-amount);
+		System.out.println(bankAccount.getAmount());
+		bankDAO.save(bankAccount);
 	}
 	
-	@Transactional(propagation = Propagation.SUPPORTS)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void creditransfer(int id,int amount) {
-		Optional<BankDTO> obj1=bankDAO.findById(Integer.valueOf(id));
-		BankDTO bankAcc=obj1.get();
-		bankAcc.setAmount(bankAcc.getAmount()+amount);
-		System.out.println(bankAcc.getAmount());
-		bankDAO.save(bankAcc);
+		Optional<BankDTO> optional=bankDAO.findById(Integer.valueOf(id));
+		BankDTO bankAccount=optional.get();
+		bankAccount.setAmount(bankAccount.getAmount()+amount);
+		System.out.println(bankAccount.getAmount());
+		bankDAO.save(bankAccount);
 	}
 	
 	

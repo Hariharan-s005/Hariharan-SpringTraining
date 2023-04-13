@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<style>
-			.container {
+			.container{
 				width: 50%;
 				margin-left: 25%;
 				margin-top: 20%;
@@ -10,23 +10,17 @@
 				justify-content: center;
 				border-style: solid;
 				font-size: x-large;
-			  }
+			};
 		</style>
 	</head>
 	<body>
 		<div class="container">
-			<form:form action="/bank/transfer" method="POST" modelAttribute="transfer">
-				CreditID:<form:input path="credit"/><br>
-				DebitID:<form:input path="debit"/><br>
-				Amount:<form:input path="amount"/><br>
-
-				<input type="submit" value="Make Transaction">
-				
+			<form:form action="/bank/create-account" method="POST" modelAttribute="bank">	
+				<div>User ID:<form:input path="uid"/></div>
+				<div>Name:<form:input path="name"/></div>
+				<div>Amount:<form:input path="amount"/></div>
+			<input type="submit" value="Create Account">
 			</form:form>
 		</div>
 	</body>
 </html>
-
-
-
-	

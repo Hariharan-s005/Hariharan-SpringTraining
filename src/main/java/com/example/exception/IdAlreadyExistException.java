@@ -7,6 +7,8 @@ package com.example.exception;
  */
 public class IdAlreadyExistException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+
 	public IdAlreadyExistException(String message) {
 		super(message);
 	}
