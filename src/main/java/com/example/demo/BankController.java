@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.exception.AmountvalueException;
 import com.example.exception.InsufficientBalanceException;
 import com.example.exception.NegativeAmountException;
+import com.example.exception.SameIdException;
 
 @RestController
 @RequestMapping(value = "/bank")
@@ -140,6 +141,11 @@ public class BankController {
 		catch(NegativeAmountException e)
 		{
 			modelAndView.setViewName("amount-value-negative");
+			return modelAndView;
+		}
+		catch(SameIdException e)
+		{
+			modelAndView.setViewName("same-id");
 			return modelAndView;
 		}
 		

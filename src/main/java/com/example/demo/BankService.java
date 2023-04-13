@@ -13,6 +13,7 @@ import com.example.exception.AmountvalueException;
 import com.example.exception.IdAlreadyExistException;
 import com.example.exception.InsufficientBalanceException;
 import com.example.exception.NegativeAmountException;
+import com.example.exception.SameIdException;
 
 
 /**
@@ -47,12 +48,16 @@ public class BankService implements BankServiceInterface{
 
 	@Override
 	@Transactional(propagation =Propagation.REQUIRES_NEW)
-	public void transfer(Transaction trans) throws InsufficientBalanceException, AmountvalueException, NegativeAmountException {
+	public void transfer(Transaction trans) throws InsufficientBalanceException, AmountvalueException, NegativeAmountException, SameIdException {
 		
 	  int creditId=trans.getCredit();
 	  int debitId=trans.getDebit();
 	  int amount =trans.getAmount();
 	  
+	  if(debitId==creditId)
+	  {
+		  throw new SameIdException("Insufficient balance");
+	  }
 	  debitransfer(debitId, amount);
 	  creditransfer(creditId, amount);
 		
@@ -69,6 +74,7 @@ public class BankService implements BankServiceInterface{
 			throw new AmountvalueException("Please enter correct amount(should not be zero)");
 		if(amount<0)
 			throw new NegativeAmountException("Please enter correct amount(should be greater than zero)");
+		
 		
 		bankAccount.setAmount(bankAccount.getAmount()-amount);
 		System.out.println(bankAccount.getAmount());
